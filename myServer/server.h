@@ -3,11 +3,13 @@
 #include <vector>
 #include <string>
 
+#pragma comment(lib,"ws2_32.lib")
+
 class Server {
 private:
     SOCKET srvSocket;
     sockaddr_in addr;
-    std::vector<SOCKET> clientSockets;
+    std::vector<SOCKET> clientSockets{};
     SOCKET maxFd;
 
     fd_set masterReadFds;

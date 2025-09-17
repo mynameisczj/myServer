@@ -125,7 +125,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="handleHttp.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="server.cpp" />
   </ItemGroup>
@@ -133,7 +132,6 @@
     <None Include="config.json" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="handleHttp.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="server.h" />
   </ItemGroup>
