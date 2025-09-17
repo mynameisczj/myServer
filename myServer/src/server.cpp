@@ -6,18 +6,21 @@
 #include <nlohmann/json.hpp>
 
 #include "server.h"
+#include "handleHttp.h"
 
 using json = nlohmann::json;
 using string = std::string;
 
 // 私有方法
 bool Server::loadConfig() {
-	std::ifstream config_file("config/config.json");
+	std::ifstream config_file("./config/config.json");
 	if (config_file.is_open()) {
 		json config = json::parse(config_file);
 		string host = config.value("host", "0.0.0.0");
 		u_short port = config.value("port", 5050);
-
+		string path = config.value("path", "./www");
+		std::cout << "Web root path: " << path << std::endl;
+		this->path = path;
 		addr.sin_family = AF_INET;
 		addr.sin_port = htons(port);
 
@@ -128,6 +131,7 @@ bool Server::initialize() {
 	}
 
 	std::cout << "Server initialized successfully!" << std::endl;
+	return true;
 }
 void Server::run() {
 	if (srvSocket == INVALID_SOCKET) {
@@ -232,7 +236,13 @@ void Server::handleClientRequest(SOCKET clientSocket) {
 	if (bytesReceived > 0) {
 		buffer[bytesReceived] = '\0';
 		std::cout << "Received " << bytesReceived << " bytes from client " << clientSocket << std::endl;
-		//Todo: 处理客户端请求
+		std::string requestData(buffer, bytesReceived);
+		// 解析HTTP请求
+		HttpHandler httpHandler(path);
+		HttpRequest reques = httpHandler.parseHttpRequest(requestData);
+
+		clientBuffers[clientSocket] = reques; // 存储请求数据
+		// 设置客户端socket为可写，准备发送响应
 		FD_SET(clientSocket, &masterWriteFds);
 	}
 	else if (bytesReceived == 0) {
@@ -248,8 +258,30 @@ void Server::handleClientRequest(SOCKET clientSocket) {
 	}
 }
 void Server::handleClientResponse(SOCKET clientSocket) {
-	//Todo: 处理客户端响应
+	auto it = clientBuffers.find(clientSocket);
+	if (it == clientBuffers.end()) {
+		std::cerr << "No request data for client " << clientSocket << std::endl;
+		cleanupClient(clientSocket);
+		return;
+	}
+
+	HttpHandler httpHandler(path);
+	std::string responseData = httpHandler.createHttpResponse(it->second).toString();
+	int bytesSent = send(clientSocket, responseData.c_str(), responseData.size(), 0);
+	if (bytesSent == SOCKET_ERROR) {
+		int err = WSAGetLastError();
+		if (err != WSAEWOULDBLOCK) {
+			std::cerr << "send() failed with error: " << err << std::endl;
+			cleanupClient(clientSocket);
+			return;
+		}
+	}
+	else {
+		std::cout << "Sent " << bytesSent << " bytes to client " << clientSocket << std::endl;
+	}
+	// 清理请求数据
 	FD_CLR(clientSocket, &masterWriteFds);
+	clientBuffers.erase(clientSocket);
 }
 void Server::cleanupClient(SOCKET clientSocket) {
 	closesocket(clientSocket);
@@ -265,3 +297,8 @@ void Server::cleanupClient(SOCKET clientSocket) {
 	updateMaxFd();
 	std::cout << "Client " << clientSocket << " cleaned up" << std::endl;
 }
+
+//void Server::onRequestProcessed(SOCKET clientSocket, const std::string& response) {
+//	clientBuffers[clientSocket] = response;
+//	FD_SET(clientSocket, &masterWriteFds); // 只在Server类内部操作fd_set
+//}
