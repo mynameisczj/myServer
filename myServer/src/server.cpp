@@ -12,7 +12,7 @@ using string = std::string;
 
 // Ë½ÓÐ·½·¨
 bool Server::loadConfig() {
-	std::ifstream config_file("config.json");
+	std::ifstream config_file("config/config.json");
 	if (config_file.is_open()) {
 		json config = json::parse(config_file);
 		string host = config.value("host", "0.0.0.0");
