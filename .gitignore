@@ -393,6 +393,7 @@ Thumbs.db
 myServer.aps
 myServer.rc
 myServer.vcxproj.user
+myServer.vcxproj
 
 # 配置文件（如有需要可以取消注释）
 # config/
