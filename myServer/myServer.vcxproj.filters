@@ -13,20 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="server.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
+    <Filter Include="资源文件\www">
+      <UniqueIdentifier>{86d0b7f1-5fb9-4f4f-85f5-5e199866d44e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\www\images">
+      <UniqueIdentifier>{3199743c-949d-4602-be54-78db79cbdc7d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="server.h">
+    <ClInclude Include="include\server.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -36,8 +34,27 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="config.json">
-      <Filter>源文件</Filter>
+    <None Include="www\image.html">
+      <Filter>资源文件\www</Filter>
     </None>
+    <None Include="www\index.html">
+      <Filter>资源文件\www</Filter>
+    </None>
+    <None Include="www\Text.html">
+      <Filter>资源文件\www</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="www\images\placeholder.jpg">
+      <Filter>资源文件\www\images</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\server.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Test</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .test-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #666;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+            .back-link:hover {
+                background-color: #555;
+            }
+    </style>
+</head>
+<body>
+    <h1>Text Content Test</h1>
+
+    <div class="test-content">
+        <p>This is a <strong>sample text content</strong> for testing the Socket server.</p>
+
+        <p>If your server is working correctly, this HTML page and all its text content should load and display properly in the browser.</p>
+
+        <h2>Test Features:</h2>
+        <ul>
+            <li>Chinese character display (UTF-8 encoding test)</li>
+            <li>HTML tag parsing (<strong>bold</strong>, <em>italic</em>)</li>
+            <li>CSS style loading</li>
+            <li>Page layout rendering</li>
+        </ul>
+
+        <p>The server successfully sent these bytes, and the browser received and correctly parsed them, ultimately presenting this formatted page you see now.</p>
+    </div>
+
+    <a href="index.html" class="back-link">Back to Home</a>
+</body>
+</html>

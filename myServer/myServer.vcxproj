@@ -102,7 +102,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;_WINSOCK_DEPRECATED_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Computing\Coding\CPlusPlus\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Computing\Coding\CPlusPlus\include;D:\homeworkspace\network\mySocket\myServer\myServer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -125,18 +125,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="server.cpp" />
+    <None Include="www\image.html" />
+    <None Include="www\index.html" />
+    <None Include="www\Text.html" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="config.json" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="include\server.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="server.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="myServer.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="www\images\placeholder.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\server.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

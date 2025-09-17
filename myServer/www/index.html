@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket server test index</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .options {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .option-button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .text-option {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+            .text-option:hover {
+                background-color: #45a049;
+                transform: translateY(-2px);
+            }
+
+        .image-option {
+            background-color: #2196F3;
+            color: white;
+        }
+
+            .image-option:hover {
+                background-color: #0b7dda;
+                transform: translateY(-2px);
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>welcome to use Socket server test</h1>
+        <div class="options">
+            <!-- 点击跳转到 word.html -->
+            <a href="Text.html" class="option-button text-option">Text</a>
+            <!-- 点击跳转到 picture.html -->
+            <a href="image.html" class="option-button image-option">image</a>
+        </div>
+    </div>
+</body>
+</html>

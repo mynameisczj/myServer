@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Test</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            color: #2196F3;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .image-container {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .test-image {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .image-description {
+            margin-top: 20px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #666;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+            .back-link:hover {
+                background-color: #555;
+            }
+    </style>
+</head>
+<body>
+    <h1>Image Loading Test</h1>
+
+    <div class="image-container">
+        <p>If the image below is displayed correctly, it means your Socket server has successfully handled the request and transmission of the image file!</p>
+
+        <!-- Image link - the server needs to be able to handle this request -->
+        <img src="images/placeholder.jpg" alt="Test Image" class="test-image">
+
+        <p class="image-description">This is a placeholder image for testing purposes. The browser retrieved its byte data through an HTTP request and decoded and rendered it according to the Content-Type header.</p>
+
+        <h3>Test Content:</h3>
+        <ul>
+            <li>Request and response of image files</li>
+            <li>Correct Content-Type header (image/jpeg)</li>
+            <li>Binary data transmission</li>
+            <li>Image decoding and rendering on the browser side</li>
+        </ul>
+    </div>
+
+    <a href="index.html" class="back-link">Back to Home</a>
+</body>
+</html>

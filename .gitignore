@@ -361,3 +361,48 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# 编译生成文件
+*.exe
+*.obj
+*.pdb
+*.ilk
+*.sln
+*.suo
+*.aps
+*.ncb
+*.user
+*.aps
+
+# 构建目录
+x64/
+Debug/
+Release/
+build/
+obj/
+bin/
+
+# 日志文件
+*.log
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 项目特定文件
+myServer.aps
+myServer.rc
+myServer.vcxproj.user
+
+# 配置文件（如有需要可以取消注释）
+# config/
+
+# IDE文件
+.vs/
+*.vcxproj.filters
+*.sdf
+*.opensdf
+
+# 资源文件（如有需要可以取消注释）
+*.rc
+resource.h
