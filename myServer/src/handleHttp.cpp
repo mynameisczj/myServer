@@ -121,26 +121,6 @@ HttpResponse HttpHandler::createHttpResponse(const HttpRequest& request) {
     return handleStaticFile(request);
 }
 
-string HttpHandler::createHttpResponse(const string& file_path) {
-    HttpResponse response;
-
-    if (fileExists(file_path)) {
-        response.statusCode = 200;
-        response.statusText = "OK";
-        response.headers["Content-Type"] = getMimeType(file_path);
-        response.body = readFile(file_path);
-    }
-    else {
-        response.statusCode = 404;
-        response.statusText = "Not Found";
-        response.headers["Content-Type"] = "text/html";
-        response.body = "<h1>404 Not Found</h1>";
-        std::cerr << "404" << std::endl;
-    }
-
-    return response.toString();
-}
-
 HttpResponse HttpHandler::handleStaticFile(const HttpRequest& request) {
     HttpResponse response;
     string filePath = webRoot + request.path;

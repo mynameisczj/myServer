@@ -17,7 +17,7 @@ bool Server::loadConfig() {
 	if (config_file.is_open()) {
 		json config = json::parse(config_file);
 		string host = config.value("host", "0.0.0.0");
-		u_short port = config.value("port", 5050);
+		u_short port = config.value("port", 8080);
 		string path = config.value("path", "./www");
 		std::cout << "Web root path: " << path << std::endl;
 		this->path = path;
@@ -33,7 +33,7 @@ bool Server::loadConfig() {
 	else {
 		std::cout << "open config.json failed, use default config" << std::endl;
 		addr.sin_family = AF_INET;
-		addr.sin_port = htons(5050);
+		addr.sin_port = htons(8080);
 		addr.sin_addr.S_un.S_addr = htonl(INADDR_ANY); //主机上任意一块网卡的IP地址
 	}
 	config_file.close();
@@ -96,7 +96,7 @@ Server::Server() : srvSocket(INVALID_SOCKET), maxFd(0), isRunning(false) {
 
 	// 初始化服务器地址
 	addr.sin_family = AF_INET;
-	addr.sin_port = htons(5050);
+	addr.sin_port = htons(8080);
 	addr.sin_addr.S_un.S_addr = htonl(INADDR_ANY);
 }
 Server::~Server() {
@@ -163,8 +163,10 @@ void Server::run() {
 		for(SOCKET i = 0; i <= maxFd; ++i) {
 			if (FD_ISSET(i, &readFds)) {
 				if (i == srvSocket) {
+					std::cout << "New connection on server socket" << std::endl;
 					acceptNewConnection();
 				} else {
+					std::cout << "Data available to read from client " << i << std::endl;
 					handleClientRequest(i);
 				}
 			}
@@ -172,6 +174,7 @@ void Server::run() {
 		// 处理可写socket
 		for(SOCKET i = 0; i <= maxFd; ++i) {
 			if (FD_ISSET(i, &writeFds)) {
+				std::cout << "Ready to send response to client " << i << std::endl;
 				handleClientResponse(i);
 			}
 		}
