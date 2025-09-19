@@ -208,6 +208,7 @@ void Server::acceptNewConnection() {
 	sockaddr_in clientAddr;
 	int addrLen = sizeof(clientAddr);
 	SOCKET clientSocket = accept(srvSocket, (sockaddr*)&clientAddr, &addrLen);
+
 	if (clientSocket == INVALID_SOCKET) {
 		int err = WSAGetLastError();
 		if (err != WSAEWOULDBLOCK) {
@@ -217,6 +218,7 @@ void Server::acceptNewConnection() {
 	}
 
 	std::cout << "New connection accepted, socket: " << clientSocket << std::endl;
+	std::cout << "Client IP: " << inet_ntoa(clientAddr.sin_addr) << ", Port: " << ntohs(clientAddr.sin_port) << std::endl;
 	// 设置客户端socket为非阻塞模式
 	u_long blockMode = 1;
 	if (ioctlsocket(clientSocket, FIONBIO, &blockMode) == SOCKET_ERROR) {
@@ -239,12 +241,14 @@ void Server::handleClientRequest(SOCKET clientSocket) {
 	if (bytesReceived > 0) {
 		buffer[bytesReceived] = '\0';
 		std::cout << "Received " << bytesReceived << " bytes from client " << clientSocket << std::endl;
+		std::cout << "Request Data:\n" << buffer << std::endl;
 		std::string requestData(buffer, bytesReceived);
 		// 解析HTTP请求
 		HttpHandler httpHandler(path);
 		HttpRequest reques = httpHandler.parseHttpRequest(requestData);
 
 		clientBuffers[clientSocket] = reques; // 存储请求数据
+		std::cout << "Stored request for client " << clientSocket << std::endl;
 		// 设置客户端socket为可写，准备发送响应
 		FD_SET(clientSocket, &masterWriteFds);
 	}
@@ -270,6 +274,7 @@ void Server::handleClientResponse(SOCKET clientSocket) {
 
 	HttpHandler httpHandler(path);
 	std::string responseData = httpHandler.createHttpResponse(it->second).toString();
+	/*std::cout << "Response Data:\n" << responseData << std::endl;*/
 	int bytesSent = send(clientSocket, responseData.c_str(), responseData.size(), 0);
 	if (bytesSent == SOCKET_ERROR) {
 		int err = WSAGetLastError();
